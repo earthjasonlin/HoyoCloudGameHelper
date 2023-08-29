@@ -35,9 +35,9 @@ const nodemailer = require("nodemailer");
         log.info("尝试签到……")
         var header = makeHeader(configs[key], appversion);
         var WalletRespond = await Wallet(header);
-        addLogContent(`<span style="color: orange">${key} Wallet返回体 <br> ${JSON.stringify(WalletRespond)}</span><br>`);
+        addLogContent(`<span style="color: orange; font-weight: bold">${key} Wallet返回体</span> <br> <span style="color: orange">${JSON.stringify(WalletRespond)}</span><br>`);
         var NotificationRespond = await ListNotification(header);
-        addLogContent(`<span style="color: orange">${key} Notification返回体 <br> ${JSON.stringify(NotificationRespond)}</span><br>`);
+        addLogContent(`<span style="color: orange; font-weight: bold">${key} Notification返回体</span> <br> <span style="color: orange">${JSON.stringify(NotificationRespond)}</span><br>`);
         if(WalletRespond.data != null) {
             successNum ++;
             log.info(`签到完毕! 剩余时长:${WalletRespond.data.free_time.free_time}分钟`)
