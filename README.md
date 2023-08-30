@@ -1,112 +1,31 @@
 # Genshin Cloud Game Helper
 
-每天帮你获取 15 分钟云原神时间~
+![Genshin Cloud Game Helper](https://socialify.git.ci/earthjasonlin/GenshinCloudGameHelper/image?forks=1&language=1&name=1&owner=1&stargazers=1&theme=Light)
 
-## 配置教程
+[《云·原神》](https://mhyy.mihoyo.com/)自动签到脚本
 
-### 全局配置 global.json
+**⚠️ 请不要进行宣传，谢谢！一旦发现宣传就跑路！**
 
-```
-{
-    "sendMail": true,
-    "mailConfig": {
-        "user":"",
-        "pass":"",
-        "mailto":"",
-        "smtpServer":"",
-        "smtpPort":"",
-        "smtpSecure":true
-    }
-}
-```
+这是一个可以帮助你每天自动进行云原神签到的脚本，自动获取每日的 15 分钟（600 分钟后无法获取）
 
-> sendMail   一个 bool 代表是否在运行结束后将结果发送至指定邮箱，false 时 mailConfig 内的内容可不填
-> mailConfig 具体配置
-> 
-> > user 发送方邮箱
-> > 
-> > pass 有授权码的填授权码，没有的填密码，填了密码报错了找授权码
-> > 
-> > mailto 接收方邮箱
-> > 
-> > smtpServer 发送邮件时使用的 smtp 服务器地址
-> > 
-> > smtpPort smtp 服务器端口
-> > 
-> > smtpSecure 如果 smtp 服务器使用 SSL/TLS，那么为 true，如果使用 STARTTLS 或不使用加密，那么为 false
+## 赞助
 
-对于常用的邮件而言，配置列举如下
+点击下面的 Badge 其中一个就可以跳转到相应页面，感谢老板的支持！
 
-| 服务    | server       | port    | secure |
-|:-----:|:------------:|:-------:|:------:|
-| QQ 邮箱 | smtp.qq.com  | 465/587 | true   |
-| 网易邮箱  | smtp.163.com | 465     | true   |
-| ...   | ...          | ...     | ...    |
+<a href="https://afdian.net/a/earthjasonlin"><img src="https://img.shields.io/badge/%E7%88%B1%E5%8F%91%E7%94%B5-earthjasonlin-%238e8cd8?style=for-the-badge" alt="前往爱发电赞助" width=auto height=auto border="0" /></a> <a href="https://dist.loliquq.cn/d/wechat-reward-code.png"><img src="https://img.shields.io/badge/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98-earthjasonlin-%2304BE02?style=for-the-badge" alt="使用微信赞助" width=auto height=auto border="0" /></a>
 
-其余邮箱服务的配置可以在对应服务商的帮助文档中找到
+## 免责声明
 
-### 用户配置
+一旦你 fork 了本仓库则代表你同意以下内容：
 
-先放一个配置模板
+- 所有账号被封禁的情况由使用者自行承担
 
-```
-{
-    "token":"",
-    "client_type":"",
-    "device_name":"",
-    "device_model":"",
-    "device_id":"",
-    "sys_version":"",
-    "channel":""
-}
-```
+- 一切由使用本脚本造成的后果由使用者自行承担
 
-具体数据 请看“抓包”环节
+## Contributions
 
-> token 是在云原神登录后用于验证的标记
-> client_type 1 代表 ios 设备 2 代表 android&鸿蒙设备
-> device_name 设备名称
-> device_model 设备型号
-> device_id 在米哈游服务器中注册的 uuid
-> sys_version 系统版本 android&鸿蒙中为系统版本 ios 设备中为 ios 版本
-> channel 下载渠道 ios 设备填"app store" android&鸿蒙填"mihoyo"（以抓包为准，我也不知道渠道服是不是这个）
+![Contribution](https://repobeats.axiom.co/api/embed/a5d4b41b1ca14049d54b93ad9d00fe478f6154ec.svg "Repobeats analytics image")
 
-### 抓包
+## Stargazers over time
 
-> > # ios
-> > 
-> > App Store 中下载应用 Stream（用于抓包）
-> > 然后看视频吧
-> > 看不了/不显示的点右边 https://hzsj.coding.net/p/ayakaturtleshop/d/PublicResource/git/raw/master/c9f1a9b91951b0f1c2da8f3817274074.mp4?download=false
-> > <video src="https://hzsj.coding.net/p/ayakaturtleshop/d/PublicResource/git/raw/master/c9f1a9b91951b0f1c2da8f3817274074.mp4?download=false"></video>
-> 
-> # android&鸿蒙
-> 
-> > （来自 https://bili33.top/posts/MHYY-AutoCheckin-Manual)
-> > 因为云原神是在手机上运行的，所以你需要安装一个手机上的抓包软件（例如 HttpCanary，或者如果你能够用 fiddler 电脑运行去抓也行）
-> > [![看就完了](https://cdn.bilicdn.tk/gh/Vikutorika/assets@master/img/Github/MHYY-AutoCheckin/HTTPCANARY-Result.jpg?download=false)]
-> > 一定要记得装抓包软件提供的证书，要不然解不了 SSL 连接，一定要先登录并成功进去了再启动抓包软件！！！
-> > [![看就完了](https://cdn.bilicdn.tk/gh/Vikutorika/assets@master/img/Github/MHYY-AutoCheckin/HTTPS-REQUEST-RESULT.png?download=false)]
-> > 这里面只要是个 HTTP 链接，随便一个里面都有我们所需要的东西，这里我就点开了一个链接，在请求里面有所有我们需要的东西，而解释我都写在图片里面了
-
-二者抓到的包差不多，抓到包之后有以下对应关系
-
-```-
-{
-    "token":"x-rpc-combo_token",
-    "client_type":"x-rpc-client_type",
-    "device_name":"x-rpc-device_name",
-    "device_model":"x-rpc-device_model",
-    "device_id":"x-rpc-device_id",
-    "sys_version":"x-rpc-sys_version",
-    "channel":"x-rpc-channel"
-}
-```
-
-对着填进去就完了
-接着在 configs 文件夹里创建任意一个 json 文件，将配置填进去
-如果想一次性签到 n 个用户，创建不同的 json 文件即可，程序会自动扫描 configs 文件夹下面的文件
-
-## 另外
-
-程序会自动获取最新的云原神版本，确保数据与用户一样
+[![Stargazers over time](https://starchart.cc/earthjasonlin/GenshinCloudGameHelper.svg)](https://starchart.cc/earthjasonlin/GenshinCloudGameHelper)
