@@ -12,7 +12,7 @@
 
 点击下面的 Badge 其中一个就可以跳转到相应页面，感谢老板的支持！
 
-<a href="https://afdian.net/a/earthjasonlin"><img src="https://img.shields.io/badge/%E7%88%B1%E5%8F%91%E7%94%B5-earthjasonlin-%238e8cd8?style=for-the-badge" alt="前往爱发电赞助" width=auto height=auto border="0" /></a> <a href="https://dist.loliquq.cn/d/wechat-reward-code.png"><img src="https://img.shields.io/badge/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98-earthjasonlin-%2304BE02?style=for-the-badge" alt="使用微信赞助" width=auto height=auto border="0" /></a>
+<a href="https://afdian.net/a/earthjasonlin"><img src="https://img.shields.io/badge/%E7%88%B1%E5%8F%91%E7%94%B5-earthjasonlin-%238e8cd8?style=for-the-badge" alt="前往爱发电赞助" width=auto height=auto border="0" /></a> <a href="https://dist.loliquq.cn/d/wechat-reward-code.jpeg"><img src="https://img.shields.io/badge/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98-earthjasonlin-%2304BE02?style=for-the-badge" alt="使用微信赞助" width=auto height=auto border="0" /></a>
 
 ## 免责声明
 
@@ -24,7 +24,7 @@
 
 ## Contributions
 
-![Contribution](https://repobeats.axiom.co/api/embed/a5d4b41b1ca14049d54b93ad9d00fe478f6154ec.svg "Repobeats analytics image")
+[![Contribution](https://repobeats.axiom.co/api/embed/a5d4b41b1ca14049d54b93ad9d00fe478f6154ec.svg "Repobeats analytics image")](#)
 
 ## Stargazers over time
 
