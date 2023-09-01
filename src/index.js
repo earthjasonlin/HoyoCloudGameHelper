@@ -40,7 +40,11 @@ const nodemailer = require("nodemailer");
             var NotificationRespond = await ListNotification(header);
             addLogContent(`<span style="color: orange; font-weight: bold">${key} Notification返回体</span> <br> <span style="color: orange">${JSON.stringify(NotificationRespond)}</span><br>`);
             successNum ++;
-            log.info(`签到完毕! 剩余时长:${WalletRespond.data.free_time.free_time}分钟`)
+            if(WalletRespond.data.free_time.send_freetime == 0) {
+                log.info(`今日已签到！总时长:${WalletRespond.data.free_time.free_time}分钟`)
+            } else {
+                log.info(`签到完毕! 获得时长：${WalletRespond.data.free_time.send_freetime}分钟，总时长:${WalletRespond.data.free_time.free_time}分钟`);
+            }
             let NotificationLength = NotificationRespond.data.list.length
             let postHeader = header;
 		    Object.assign(postHeader, {
