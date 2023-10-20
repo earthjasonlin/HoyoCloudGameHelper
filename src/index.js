@@ -45,8 +45,8 @@ const nodemailer = require("nodemailer");
         totalNum = 0;
     for (key in configs) {
         totalNum++;
-        log.info(`正在执行配置 ${key}`);
-        log.info("尝试签到……");
+        log.info(`${key} - 正在执行配置 ${key}`);
+        log.info(`${key} - 尝试签到……`);
         var header = makeHeader(configs[key], appversion);
         var WalletRespond = await Wallet(header);
         addLogContent(
@@ -63,7 +63,7 @@ const nodemailer = require("nodemailer");
             );
             successNum++;
             log.info(
-                `签到完毕! 获得时长：${WalletRespond.data.free_time.send_freetime}分钟，总时长：${WalletRespond.data.free_time.free_time}分钟`
+                `${key} - 签到完毕! 获得时长：${WalletRespond.data.free_time.send_freetime}分钟，总时长：${WalletRespond.data.free_time.free_time}分钟`
             );
             if (configs[key].email != null) {
                 SendResult(
@@ -86,7 +86,7 @@ const nodemailer = require("nodemailer");
                 );
             }
         } else {
-            log.error("签到失败");
+            log.error(`${key} - 签到失败`);
             if (configs[key].email != null) {
                 SendResult(
                     transporter,
