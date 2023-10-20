@@ -3,11 +3,11 @@
     "maxDelay": 5000,
     "sendMail": false,
     "mailConfig": {
-        "user":"",
-        "pass":"",
-        "mailto":"",
-        "smtpServer":"",
-        "smtpPort":"",
-        "smtpSecure":true
+        "user": "",
+        "pass": "",
+        "mailto": "",
+        "smtpServer": "",
+        "smtpPort": "",
+        "smtpSecure": true
     }
 }
