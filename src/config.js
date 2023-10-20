@@ -79,6 +79,7 @@ exports.getGlobalConfig = function () {
 exports.getConfigs = function () {
     try {
         var configsList = fs.readdirSync("configs");
+        configsList = configsList.filter((file) => file.endsWith(".json"));
     } catch (e) {
         if (
             e == "Error: ENOENT: no such file or directory, scandir 'configs'"
