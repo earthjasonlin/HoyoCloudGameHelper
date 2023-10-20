@@ -8,6 +8,7 @@ const {
     SendLog,
     AppVersion,
     getGlobalConfig,
+    SendResult,
 } = require("./config");
 
 const { log, addLogContent, getLogs, sleep } = require("./util");
@@ -64,6 +65,14 @@ const nodemailer = require("nodemailer");
             log.info(
                 `签到完毕! 获得时长：${WalletRespond.data.free_time.send_freetime}分钟，总时长:${WalletRespond.data.free_time.free_time}分钟`
             );
+            if (configs[key].email != null) {
+                SendResult(
+                    transporter,
+                    globalConfig.mailConfig.user,
+                    configs[key].email,
+                    `签到完毕! 获得时长：${WalletRespond.data.free_time.send_freetime}分钟，总时长:${WalletRespond.data.free_time.free_time}分钟`
+                );
+            }
             let NotificationLength = NotificationRespond.data.list.length;
             let postHeader = header;
             Object.assign(postHeader, {
@@ -78,6 +87,14 @@ const nodemailer = require("nodemailer");
             }
         } else {
             log.error("签到失败");
+            if (configs[key].email != null) {
+                SendResult(
+                    transporter,
+                    globalConfig.mailConfig.user,
+                    configs[key].email,
+                    "签到失败"
+                );
+            }
         }
         var delay = Math.round(
             Math.random() * (maxDelay - minDelay) + minDelay

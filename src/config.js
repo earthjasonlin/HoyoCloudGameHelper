@@ -164,3 +164,20 @@ exports.SendLog = function (
         }
     );
 };
+
+exports.SendResult = function (transporter, mailfrom, mailto, content) {
+    transporter.sendMail(
+        {
+            from: `"Genshin Cloud Game Helper" <${mailfrom}>`, //邮件来源
+            to: mailto, //邮件发送到哪里，多个邮箱使用逗号隔开
+            subject: `Genshin Cloud Game Helper`, // 邮件主题
+            text: `${content}`, // 存文本类型的邮件正文
+        },
+        (error) => {
+            if (error) {
+                return console.log(error);
+            }
+            log.info(`已发送通知至${mailto}`);
+        }
+    );
+};
