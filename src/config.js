@@ -166,7 +166,7 @@ exports.SendLog = function (
     );
 };
 
-exports.SendResult = function (transporter, mailfrom, mailto, content) {
+exports.SendResult = function (transporter, mailfrom, mailto, content, key) {
     transporter.sendMail(
         {
             from: `"Genshin Cloud Game Helper" <${mailfrom}>`, //邮件来源
@@ -178,7 +178,7 @@ exports.SendResult = function (transporter, mailfrom, mailto, content) {
             if (error) {
                 return console.log(error);
             }
-            log.info(`已发送通知至${mailto}`);
+            log.info(`${key} - 已发送通知至${mailto}`);
         }
     );
 };

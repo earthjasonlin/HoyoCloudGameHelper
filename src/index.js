@@ -70,7 +70,8 @@ const nodemailer = require("nodemailer");
                     transporter,
                     globalConfig.mailConfig.user,
                     configs[key].email,
-                    `签到完毕! 获得时长：${WalletRespond.data.free_time.send_freetime}分钟，总时长：${WalletRespond.data.free_time.free_time}分钟`
+                    `签到完毕! 获得时长：${WalletRespond.data.free_time.send_freetime}分钟，总时长：${WalletRespond.data.free_time.free_time}分钟`,
+                    key
                 );
             }
             let NotificationLength = NotificationRespond.data.list.length;
@@ -92,7 +93,8 @@ const nodemailer = require("nodemailer");
                     transporter,
                     globalConfig.mailConfig.user,
                     configs[key].email,
-                    "签到失败"
+                    "签到失败",
+                    key
                 );
             }
         }
