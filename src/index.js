@@ -1,6 +1,6 @@
 const { getConfigs, checkConfigs, makeHeader, ListNotification, AckNotification, Wallet, SendLog, AppVersion, getGlobalConfig } = require("./config")
 
-const { log, addLogContent, getLogs } = require("./logger");
+const { log, addLogContent, getLogs, sleep } = require("./util");
 
 const nodemailer = require("nodemailer");
 
@@ -20,6 +20,8 @@ const nodemailer = require("nodemailer");
             }
         });
     }
+    var minDelay = globalConfig.minDelay
+    var maxDelay = globalConfig.maxDelay
     var configs = getConfigs();
     log.info(`正在检测配置有效性`)
     checkConfigs(configs)
@@ -53,6 +55,9 @@ const nodemailer = require("nodemailer");
         } else {
             log.error("签到失败")
         }
+        var delay = Math.round(Math.random() * (maxDelay - minDelay) + minDelay)
+        log.info(`暂停：${delay}毫秒`)
+        await sleep(delay);
     }
     
     if (globalConfig.sendMail == true) {

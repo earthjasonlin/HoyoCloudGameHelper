@@ -1,7 +1,7 @@
 const { exit } = require("process")
 const fs = require("fs") 
 const { default: axios } = require("axios")
-const { log } = require("./logger")
+const { log } = require("./util")
 
 exports.ListNotificationURL = 'https://api-cloudgame.mihoyo.com/hk4e_cg_cn/gamer/api/listNotifications?is_sort=true&source=NotificationSourceUnknown&status=NotificationStatusUnread&type=NotificationTypePopup'
 exports.AckNotificationURL = 'https://api-cloudgame.mihoyo.com/hk4e_cg_cn/gamer/api/ackNotification'

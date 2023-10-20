@@ -18,3 +18,9 @@ exports.log = {
         baseLogger.error(content)
     }
 }
+
+exports.sleep = function (delay) {
+    return new Promise((resolve) => {
+      setTimeout(resolve, delay)
+    })
+  }

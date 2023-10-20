@@ -1,4 +1,6 @@
 {
+    "minDelay": 1000,
+    "maxDelay": 5000,
     "sendMail": false,
     "mailConfig": {
         "user":"",
