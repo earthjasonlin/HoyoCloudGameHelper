@@ -63,14 +63,14 @@ const nodemailer = require("nodemailer");
             );
             successNum++;
             log.info(
-                `签到完毕! 获得时长：${WalletRespond.data.free_time.send_freetime}分钟，总时长:${WalletRespond.data.free_time.free_time}分钟`
+                `签到完毕! 获得时长：${WalletRespond.data.free_time.send_freetime}分钟，总时长：${WalletRespond.data.free_time.free_time}分钟`
             );
             if (configs[key].email != null) {
                 SendResult(
                     transporter,
                     globalConfig.mailConfig.user,
                     configs[key].email,
-                    `签到完毕! 获得时长：${WalletRespond.data.free_time.send_freetime}分钟，总时长:${WalletRespond.data.free_time.free_time}分钟`
+                    `签到完毕! 获得时长：${WalletRespond.data.free_time.send_freetime}分钟，总时长：${WalletRespond.data.free_time.free_time}分钟`
                 );
             }
             let NotificationLength = NotificationRespond.data.list.length;

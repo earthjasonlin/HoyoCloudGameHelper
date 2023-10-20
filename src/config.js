@@ -67,9 +67,9 @@ exports.getGlobalConfig = function () {
         var globalConfig = fs.readFileSync("global.json");
     } catch (e) {
         if (e.toString().includes("Error: ENOENT: no such file or directory")) {
-            log.error(`读取配置失败!找不到全局配置文件`);
+            log.error(`读取配置失败！找不到全局配置文件`);
         } else {
-            log.error(`读取配置失败!错误信息：${e}`);
+            log.error(`读取配置失败！错误信息：${e}`);
         }
         exit();
     }
@@ -84,9 +84,9 @@ exports.getConfigs = function () {
         if (
             e == "Error: ENOENT: no such file or directory, scandir 'configs'"
         ) {
-            log.error(`读取配置失败!找不到configs文件夹`);
+            log.error(`读取配置失败！找不到configs文件夹`);
         } else {
-            log.error(`读取配置失败!错误信息：${e}`);
+            log.error(`读取配置失败！错误信息：${e}`);
         }
         exit();
     }
