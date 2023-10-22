@@ -44,6 +44,11 @@ const nodemailer = require("nodemailer");
     var successNum = 0,
         totalNum = 0;
     for (key in configs) {
+        var delay = Math.round(
+            Math.random() * (maxDelay - minDelay) + minDelay
+        );
+        log.info(`暂停：${delay}毫秒`);
+        await sleep(delay);
         totalNum++;
         log.info(`${key} - 正在执行配置 ${key}`);
         log.info(`${key} - 尝试签到……`);
@@ -98,11 +103,6 @@ const nodemailer = require("nodemailer");
                 );
             }
         }
-        var delay = Math.round(
-            Math.random() * (maxDelay - minDelay) + minDelay
-        );
-        log.info(`暂停：${delay}毫秒`);
-        await sleep(delay);
     }
 
     if (globalConfig.sendMail == true) {
