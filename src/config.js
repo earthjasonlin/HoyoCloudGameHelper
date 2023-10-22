@@ -4,11 +4,11 @@ const { default: axios } = require("axios");
 const { log } = require("./util");
 
 exports.ListNotificationURL =
-    "https://api-cloudgame.mihoyo.com/hk4e_cg_cn/gamer/api/listNotifications?is_sort=true&source=NotificationSourceUnknown&status=NotificationStatusUnread&type=NotificationTypePopup";
+    "https://api-cloudgame.mihoyo.com/hk4e_cg_cn/gamer/api/listNotifications?status=NotificationStatusUnread&type=NotificationTypePopup&is_sort=true";
 exports.AckNotificationURL =
     "https://api-cloudgame.mihoyo.com/hk4e_cg_cn/gamer/api/ackNotification";
 exports.WalletURL =
-    "https://api-cloudgame.mihoyo.com/hk4e_cg_cn/wallet/wallet/get?cost_method=COST_METHOD_UNSPECIFIED";
+    "https://api-cloudgame.mihoyo.com/hk4e_cg_cn/wallet/wallet/get?cost_method=0";
 exports.AnnouncementURL =
     "https://api-cloudgame.mihoyo.com/hk4e_cg_cn/gamer/api/getAnnouncementInfo";
 // Here must be an earlier version so that the response won't be null
@@ -39,15 +39,7 @@ exports.Wallet = async function (header) {
     tmp.StringVersion = JSON.stringify(tmp);
     return tmp;
 };
-exports.Announcement = async function (header) {
-    let tmp = (
-        await axios(exports.AnnouncementURL, {
-            headers: header,
-        })
-    ).data;
-    tmp.StringVersion = JSON.stringify(tmp);
-    return tmp;
-};
+
 exports.AppVersion = async function () {
     let tmp = (await axios(exports.AppVersionURL)).data;
     tmp.StringVersion = JSON.stringify(tmp);
@@ -129,15 +121,14 @@ exports.makeHeader = function (data, appversion) {
         "x-rpc-device_model": data.device_model,
         "x-rpc-app_id": 1953439974,
         "x-rpc-cg_game_biz": "hk4e_cn",
-        "x-rpc-preview": 0,
         "x-rpc-op_biz": "clgm_cn",
         "x-rpc-language": "zh-cn",
-        "x-rpc-vendor_id": 2,
-        Referer: "https://app.mihoyo.com",
+        "x-rpc-vendor_id": 1,
+        "x-rpc-cps": "cyydmihoyo",
         Host: "api-cloudgame.mihoyo.com",
         Connection: "Keep-Alive",
         "Accept-Encoding": "gzip, deflate",
-        Accept: "*/*",
+        "User-Agent": "okhttp/4.10.0"
     };
 };
 

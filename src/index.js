@@ -83,7 +83,7 @@ const nodemailer = require("nodemailer");
             let postHeader = header;
             Object.assign(postHeader, {
                 "Content-Length": 28,
-                "Content-Type": "application/json",
+                "Content-Type": "application/json; charset=UTF-8",
             });
             for (var i = 0; i < NotificationLength; i++) {
                 AckNotification(
@@ -108,12 +108,12 @@ const nodemailer = require("nodemailer");
     if (globalConfig.sendMail == true) {
         log.info(`运行完毕！丢出日志`);
         SendLog(
-            transporter,
-            globalConfig.mailConfig.user,
-            globalConfig.mailConfig.mailto,
-            successNum,
-            totalNum,
-            getLogs()
+        transporter,
+        globalConfig.mailConfig.user,
+        globalConfig.mailConfig.mailto,
+        successNum,
+        totalNum,
+        getLogs()
         );
     }
 })();
