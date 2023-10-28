@@ -106,6 +106,8 @@ const nodemailer = require("nodemailer");
     }
 
     if (globalConfig.sendMail == true) {
+        log.info(`暂停：10秒`);
+        await sleep(10000);
         log.info(`运行完毕！丢出日志`);
         SendLog(
         transporter,
