@@ -1,5 +1,5 @@
 const reggol = require("reggol");
-const baseLogger = new reggol("GenshinCloudGameHelper");
+const baseLogger = new reggol("HoyoCloudGameHelper");
 let logContent = ``;
 exports.addLogContent = function (content) {
     logContent += content;

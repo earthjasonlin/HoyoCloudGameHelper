@@ -3,36 +3,66 @@ const fs = require("fs");
 const { default: axios } = require("axios");
 const { log } = require("./util");
 
-exports.ListNotificationURL =
+exports.hk4e_ListNotificationURL =
     "https://api-cloudgame.mihoyo.com/hk4e_cg_cn/gamer/api/listNotifications?status=NotificationStatusUnread&type=NotificationTypePopup&is_sort=true";
-exports.AckNotificationURL =
+exports.hk4e_AckNotificationURL =
     "https://api-cloudgame.mihoyo.com/hk4e_cg_cn/gamer/api/ackNotification";
-exports.WalletURL =
+exports.hk4e_WalletURL =
     "https://api-cloudgame.mihoyo.com/hk4e_cg_cn/wallet/wallet/get?cost_method=0";
-exports.AnnouncementURL =
-    "https://api-cloudgame.mihoyo.com/hk4e_cg_cn/gamer/api/getAnnouncementInfo";
-// Here must be an earlier version so that the response won't be null
-exports.AppVersionURL =
+exports.hk4e_AppVersionURL =
     "https://api-takumi.mihoyo.com/ptolemaios/api/getLatestRelease?app_id=1953443910&app_version=3.8.0&channel=mihoyo";
 
-exports.ListNotification = async function (header) {
+exports.nap_ListNotificationURL =
+    "https://cg-nap-api.mihoyo.com/nap_cn/cg/gamer/api/listNotifications?status=NotificationStatusUnread&type=NotificationTypePopup&is_sort=true";
+exports.nap_AckNotificationURL =
+    "https://cg-nap-api.mihoyo.com/nap_cn/cg/gamer/api/ackNotification";
+exports.nap_WalletURL =
+    "https://cg-nap-api.mihoyo.com/nap_cn/cg/wallet/wallet/get?cost_method=0";
+exports.nap_AppVersionURL =
+    "https://api-takumi.mihoyo.com/ptolemaios_api/api/getLatestRelease?app_id=1953458691&app_version=1.4.0&channel=appstore";
+
+exports.hk4e_ListNotification = async function (header) {
     let tmp = (
-        await axios(exports.ListNotificationURL, {
+        await axios(exports.hk4e_ListNotificationURL, {
             headers: header,
         })
     ).data;
     tmp.StringVersion = JSON.stringify(tmp);
     return tmp;
 };
-exports.AckNotification = async function (header, id) {
+exports.nap_ListNotification = async function (header) {
+    let tmp = (
+        await axios(exports.nap_ListNotificationURL, {
+            headers: header,
+        })
+    ).data;
+    tmp.StringVersion = JSON.stringify(tmp);
+    return tmp;
+};
+exports.hk4e_AckNotification = async function (header, id) {
     let data = `{"id":"${id}"}`;
-    await axios.post(exports.AckNotificationURL, data, {
+    await axios.post(exports.hk4e_AckNotificationURL, data, {
         headers: header,
     });
 };
-exports.Wallet = async function (header) {
+exports.nap_AckNotification = async function (header, id) {
+    let data = `{"id":"${id}"}`;
+    await axios.post(exports.nap_AckNotificationURL, data, {
+        headers: header,
+    });
+};
+exports.hk4e_Wallet = async function (header) {
     let tmp = (
-        await axios(exports.WalletURL, {
+        await axios(exports.hk4e_WalletURL, {
+            headers: header,
+        })
+    ).data;
+    tmp.StringVersion = JSON.stringify(tmp);
+    return tmp;
+};
+exports.nap_Wallet = async function (header) {
+    let tmp = (
+        await axios(exports.nap_WalletURL, {
             headers: header,
         })
     ).data;
@@ -40,11 +70,17 @@ exports.Wallet = async function (header) {
     return tmp;
 };
 
-exports.AppVersion = async function () {
-    let tmp = (await axios(exports.AppVersionURL)).data;
+exports.hk4e_AppVersion = async function () {
+    let tmp = (await axios(exports.hk4e_AppVersionURL)).data;
     tmp.StringVersion = JSON.stringify(tmp);
     return tmp;
 };
+exports.nap_AppVersion = async function () {
+    let tmp = (await axios(exports.nap_AppVersionURL)).data;
+    tmp.StringVersion = JSON.stringify(tmp);
+    return tmp;
+};
+
 var configKeys = [
     "token",
     "client_type",
@@ -68,30 +104,55 @@ exports.getGlobalConfig = function () {
     return JSON.parse(globalConfig);
 };
 
-exports.getConfigs = function () {
+exports.hk4e_getConfigs = function () {
     try {
-        var configsList = fs.readdirSync("configs");
+        var configsList = fs.readdirSync("configs/hk4e");
         configsList = configsList.filter((file) => file.endsWith(".json"));
     } catch (e) {
         if (
             e == "Error: ENOENT: no such file or directory, scandir 'configs'"
         ) {
-            log.error(`读取配置失败！找不到configs文件夹`);
+            log.error(`读取配置失败！找不到configs/hk4e文件夹`);
         } else {
             log.error(`读取配置失败！错误信息：${e}`);
         }
         exit();
     }
-    log.info(`检测到${configsList.length}个配置文件：`);
+    log.info(`检测到${configsList.length}个原神配置文件：`);
     configsList.forEach((file) => {
         log.info(`${file}`);
     });
     var configs = {};
     configsList.forEach((file) => {
-        configs[file] = JSON.parse(fs.readFileSync(`configs/${file}`));
+        configs[file] = JSON.parse(fs.readFileSync(`configs/hk4e/${file}`));
     });
     return configs;
 };
+exports.nap_getConfigs = function () {
+    try {
+        var configsList = fs.readdirSync("configs/nap");
+        configsList = configsList.filter((file) => file.endsWith(".json"));
+    } catch (e) {
+        if (
+            e == "Error: ENOENT: no such file or directory, scandir 'configs'"
+        ) {
+            log.error(`读取配置失败！找不到configs/nap文件夹`);
+        } else {
+            log.error(`读取配置失败！错误信息：${e}`);
+        }
+        exit();
+    }
+    log.info(`检测到${configsList.length}个绝区零配置文件：`);
+    configsList.forEach((file) => {
+        log.info(`${file}`);
+    });
+    var configs = {};
+    configsList.forEach((file) => {
+        configs[file] = JSON.parse(fs.readFileSync(`configs/nap/${file}`));
+    });
+    return configs;
+};
+
 exports.checkConfigs = function (configs) {
     for (file in configs) {
         var configThis = configs[file];
@@ -109,7 +170,7 @@ exports.checkConfigs = function (configs) {
     }
 };
 
-exports.makeHeader = function (data, appversion) {
+exports.hk4e_makeHeader = function (data, appversion) {
     return {
         "x-rpc-combo_token": data.token,
         "x-rpc-client_type": data.client_type,
@@ -131,6 +192,29 @@ exports.makeHeader = function (data, appversion) {
         "User-Agent": "okhttp/4.10.0"
     };
 };
+// iOS
+exports.nap_makeHeader = function (data, appversion) {
+    return {
+        "x-rpc-combo_token": data.token,
+        "x-rpc-client_type": data.client_type,
+        "x-rpc-app_version": appversion,
+        "x-rpc-sys_version": data.sys_version,
+        "x-rpc-channel": data.channel,
+        "x-rpc-device_id": data.device_id,
+        "x-rpc-device_name": data.device_name,
+        "x-rpc-device_model": data.device_model,
+        "x-rpc-cg_game_id": 9000357,
+        "x-rpc-cg_game_biz": "nap_cn",
+        "x-rpc-op_biz": "clgm_nap-cn",
+        "x-rpc-language": "zh-cn",
+        "x-rpc-vendor_id": 2,
+        "x-rpc-cps": "appstore",
+        Host: "cg-nap-api.mihoyo.com",
+        Connection: "Keep-Alive",
+        "Accept-Encoding": "gzip, deflate, br",
+        "User-Agent": "CloudGame/2 CFNetwork/1410.1 Darwin/22.6.0"
+    };
+};
 
 exports.SendLog = function (
     transporter,
@@ -142,7 +226,7 @@ exports.SendLog = function (
 ) {
     transporter.sendMail(
         {
-            from: `"Genshin Cloud Game Helper" <${mailfrom}>`, //邮件来源
+            from: `"Hoyo Cloud Game Helper" <${mailfrom}>`, //邮件来源
             to: mailto, //邮件发送到哪里，多个邮箱使用逗号隔开
             subject: `今日已签到${successNum}/${totalNum}名用户`, // 邮件主题
             text: "", // 存文本类型的邮件正文
@@ -160,9 +244,9 @@ exports.SendLog = function (
 exports.SendResult = function (transporter, mailfrom, mailto, content, key) {
     transporter.sendMail(
         {
-            from: `"Genshin Cloud Game Helper" <${mailfrom}>`, //邮件来源
+            from: `"Hoyo Cloud Game Helper" <${mailfrom}>`, //邮件来源
             to: mailto, //邮件发送到哪里，多个邮箱使用逗号隔开
-            subject: `Genshin Cloud Game Helper`, // 邮件主题
+            subject: `Hoyo Cloud Game Helper`, // 邮件主题
             text: `${content}`, // 存文本类型的邮件正文
         },
         (error) => {
