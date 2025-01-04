@@ -79,7 +79,7 @@ const nodemailer = require("nodemailer");
             log.info(
                 `${key} - 签到完毕! 原神获得时长：${hk4e_WalletRespond.data.free_time.send_freetime}分钟，总时长：${hk4e_WalletRespond.data.free_time.free_time}分钟`
             );
-            if (hk4e_configs[key].email != null) {
+            if (hk4e_configs[key].email != null && globalConfig.sendMail == true) {
                 SendResult(
                     transporter,
                     globalConfig.mailConfig.user,
@@ -102,7 +102,7 @@ const nodemailer = require("nodemailer");
             }
         } else {
             log.error(`${key} - 签到失败`);
-            if (hk4e_configs[key].email != null) {
+            if (hk4e_configs[key].email != null && globalConfig.sendMail == true) {
                 SendResult(
                     transporter,
                     globalConfig.mailConfig.user,
@@ -140,7 +140,7 @@ const nodemailer = require("nodemailer");
             log.info(
                 `${key} - 签到完毕! 绝区零获得时长：${nap_WalletRespond.data.free_time.send_freetime}分钟，总时长：${nap_WalletRespond.data.free_time.free_time}分钟`
             );
-            if (nap_configs[key].email != null) {
+            if (nap_configs[key].email != null && globalConfig.sendMail == true) {
                 SendRnapt(
                     transporter,
                     globalConfig.mailConfig.user,
@@ -163,7 +163,7 @@ const nodemailer = require("nodemailer");
             }
         } else {
             log.error(`${key} - 签到失败`);
-            if (nap_configs[key].email != null) {
+            if (nap_configs[key].email != null && globalConfig.sendMail == true) {
                 SendResult(
                     transporter,
                     globalConfig.mailConfig.user,
