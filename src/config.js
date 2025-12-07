@@ -3,23 +3,25 @@ const fs = require("fs");
 const { default: axios } = require("axios");
 const { log } = require("./util");
 
+// Updated on 2025/12/07 Windows client 6.2.0
 exports.hk4e_ListNotificationURL =
-    "https://api-cloudgame.mihoyo.com/hk4e_cg_cn/gamer/api/listNotifications?status=NotificationStatusUnread&type=NotificationTypePopup&is_sort=true";
+    "https://api-cloudgame.mihoyo.com/hk4e_cg_cn/gamer/api/listNotifications?is_sort=true&source=NotificationSourceUnknown&status=NotificationStatusUnread&type=NotificationTypePopup";
 exports.hk4e_AckNotificationURL =
     "https://api-cloudgame.mihoyo.com/hk4e_cg_cn/gamer/api/ackNotification";
 exports.hk4e_WalletURL =
-    "https://api-cloudgame.mihoyo.com/hk4e_cg_cn/wallet/wallet/get?cost_method=0";
+    "https://api-cloudgame.mihoyo.com/hk4e_cg_cn/wallet/wallet/get?cost_method=COST_METHOD_UNSPECIFIED&get_type=GET_TYPE_DEFAULT";
 exports.hk4e_AppVersionURL =
-    "https://api-takumi.mihoyo.com/ptolemaios/api/getLatestRelease?app_id=1953443910&app_version=3.8.0&channel=mihoyo";
+    "https://api-takumi.mihoyo.com/ptolemaios_api/api/getLatestRelease?app_id=1953443910&app_version=6.1.0&channel=cypcweb";
 
+// Updated on 2025/06/29 Windows client 2.0.1
 exports.nap_ListNotificationURL =
-    "https://cg-nap-api.mihoyo.com/nap_cn/cg/gamer/api/listNotifications?status=NotificationStatusUnread&type=NotificationTypePopup&is_sort=true";
+    "https://cg-nap-api.mihoyo.com/nap_cn/cg/gamer/api/listNotifications?is_sort=true&source=NotificationSourceUnknown&status=NotificationStatusUnread&type=NotificationTypeObvious";
 exports.nap_AckNotificationURL =
     "https://cg-nap-api.mihoyo.com/nap_cn/cg/gamer/api/ackNotification";
 exports.nap_WalletURL =
-    "https://cg-nap-api.mihoyo.com/nap_cn/cg/wallet/wallet/get?cost_method=0";
+    "https://cg-nap-api.mihoyo.com/nap_cn/cg/wallet/wallet/get?cost_method=COST_METHOD_UNSPECIFIED&get_type=GET_TYPE_DEFAULT";
 exports.nap_AppVersionURL =
-    "https://api-takumi.mihoyo.com/ptolemaios_api/api/getLatestRelease?app_id=1953458691&app_version=1.4.0&channel=appstore";
+    "https://api-takumi.mihoyo.com/ptolemaios_api/api/getLatestRelease?app_id=1953461632&app_version=2.0.0&channel=mihoyo";
 
 exports.hk4e_ListNotification = async function (header) {
     let tmp = (
@@ -170,49 +172,53 @@ exports.checkConfigs = function (configs) {
     }
 };
 
+// Updated on 2025/12/07 Windows client 6.2.0
 exports.hk4e_makeHeader = function (data, appversion) {
     return {
-        "x-rpc-combo_token": data.token,
-        "x-rpc-client_type": data.client_type,
-        "x-rpc-app_version": appversion,
-        "x-rpc-sys_version": data.sys_version,
-        "x-rpc-channel": data.channel,
-        "x-rpc-device_id": data.device_id,
-        "x-rpc-device_name": data.device_name,
-        "x-rpc-device_model": data.device_model,
-        "x-rpc-app_id": 1953439974,
-        "x-rpc-cg_game_biz": "hk4e_cn",
-        "x-rpc-op_biz": "clgm_cn",
-        "x-rpc-language": "zh-cn",
-        "x-rpc-vendor_id": 1,
-        "x-rpc-cps": "cyydmihoyo",
-        Host: "api-cloudgame.mihoyo.com",
-        Connection: "Keep-Alive",
+        Accept: "*/*",
         "Accept-Encoding": "gzip, deflate",
-        "User-Agent": "okhttp/4.10.0"
+        Host: "api-cloudgame.mihoyo.com",
+        "x-rpc-app_id": 1953443910,
+        "x-rpc-app_version": appversion,
+        "x-rpc-cg_game_biz": "hk4e_cn",
+        "x-rpc-cg_game_id": 9000055,
+        "x-rpc-channel": data.channel,
+        "x-rpc-client_type": data.client_type,
+        "x-rpc-combo_token": data.token,
+        "x-rpc-cps": "mihoyo",
+        "x-rpc-device_id": data.device_id,
+        "x-rpc-device_model": data.device_model,
+        "x-rpc-device_name": data.device_name,
+        "x-rpc-language": "zh-cn",
+        "x-rpc-op_biz": "clgm_cn",
+        "x-rpc-preview": 0,
+        "x-rpc-sys_version": data.sys_version,
+        "x-rpc-vendor_id": 2
     };
 };
-// iOS
+
+// Updated on 2025/06/29 Windows client 2.0.1
 exports.nap_makeHeader = function (data, appversion) {
     return {
-        "x-rpc-combo_token": data.token,
-        "x-rpc-client_type": data.client_type,
+        Accept: "*/*",
+        "Accept-Encoding": "gzip, deflate",
+        Host: "cg-nap-api.mihoyo.com",
+        "x-rpc-app_id": 1953461632,
         "x-rpc-app_version": appversion,
-        "x-rpc-sys_version": data.sys_version,
+        "x-rpc-cg_game_biz": "nap_cn",
+        "x-rpc-cg_game_id": 9000357,
         "x-rpc-channel": data.channel,
+        "x-rpc-client_type": data.client_type,
+        "x-rpc-combo_token": data.token,
+        "x-rpc-cps": "mihoyo",
         "x-rpc-device_id": data.device_id,
         "x-rpc-device_name": data.device_name,
         "x-rpc-device_model": data.device_model,
-        "x-rpc-cg_game_id": 9000357,
-        "x-rpc-cg_game_biz": "nap_cn",
-        "x-rpc-op_biz": "clgm_nap-cn",
         "x-rpc-language": "zh-cn",
+        "x-rpc-op_biz": "clgm_nap-cn",
+        "x-rpc-preview": 0,
+        "x-rpc-sys_version": data.sys_version,
         "x-rpc-vendor_id": 2,
-        "x-rpc-cps": "appstore",
-        Host: "cg-nap-api.mihoyo.com",
-        Connection: "Keep-Alive",
-        "Accept-Encoding": "gzip, deflate, br",
-        "User-Agent": "CloudGame/2 CFNetwork/1410.1 Darwin/22.6.0"
     };
 };
 
